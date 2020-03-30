@@ -130,20 +130,9 @@ def BFTIterLinkedList():
     GraphSearch.BFTIter(ll)
 
 graph = Graph()
-graph.addNode(0)
-graph.addNode(1)
-graph.addNode(2)
-graph.addNode(3)
-graph.addNode(4)
-graph.addNode(5)
-graph.addNode(6)
-graph.addNode(7)
-graph.addNode(8)
-graph.addNode(9)
-graph.addNode(10)
-graph.addNode(11)
-graph.addNode(12)
-graph.addNode(13)
+
+for i in range(14):
+    graph.addNode(i)
 
 graph.nodes[0].neighbors = [graph.nodes[7], graph.nodes[3], graph.nodes[4], graph.nodes[1]]
 graph.nodes[1].neighbors = [graph.nodes[0], graph.nodes[2], graph.nodes[11]]
