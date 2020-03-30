@@ -108,7 +108,7 @@ def createRandomUnweightedGraphIter(n):
     g = Graph()
     for i in range(n):
         g.addNode(random.randint(0, 10*n))
-    for i in range(random.randint(1, n)):
+    for i in range(random.randint(1, n - 1)):
         g.addUndirectedEdge(random.sample(g.getAllNodes(), 1)[0], random.sample(g.getAllNodes(), 1)[0])
 
     return g
