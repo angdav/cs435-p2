@@ -39,7 +39,7 @@ class GraphSearch:
     def DFSRecHelper(cls, start, end, visited, stack, traversal):
         if len(stack) > 0:
             curr = stack.pop()
-            traversal.append(curr.val)
+            traversal.append(curr)
             if curr == end:
                 return traversal
             for v in curr.neighbors:
@@ -56,11 +56,11 @@ class GraphSearch:
         traversal = []
 
         while len(stack) > 0:
-            cur = stack.pop()
-            traversal.append(cur.val)
-            if cur == end:
+            curr = stack.pop()
+            traversal.append(curr)
+            if curr == end:
                 return traversal
-            for v in cur.neighbors:
+            for v in curr.neighbors:
                 if v not in visited:
                     visited.add(v)
                     stack.append(v)
@@ -77,7 +77,7 @@ class GraphSearch:
                 queue.insert(0, node)
             while len(queue) > 0:
                 curr = queue.pop()
-                traversal.append(curr.val)
+                traversal.append(curr)
                 for neighbor in curr.neighbors:
                     if neighbor not in visited:
                         visited.add(neighbor)
@@ -90,19 +90,20 @@ class GraphSearch:
 
     @classmethod
     def BFTRecHelper(cls, graph, visited, queue, traversal):
-        for node in graph.nodes:
-            if node not in visited:
-                visited.add(node)
-                queue.insert(0, node)
-            if len(queue) == 0:
-                return traversal
-            curr = queue.pop()
-            traversal.append(curr.val)
-            for neighbor in curr.neighbors:
-                if neighbor not in visited:
-                    visited.add(neighbor)
-                    queue.insert(0, neighbor)
-            return cls.BFTRecHelper(graph, visited, queue, traversal)
+        if len(queue) == 0:
+            for node in graph.nodes:
+                if node not in visited:
+                    visited.add(node)
+                    queue.insert(0, node)
+                    return cls.BFTRecHelper(graph, visited, queue, traversal)
+            return traversal
+        curr = queue.pop()
+        traversal.append(curr)
+        for neighbor in curr.neighbors:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.insert(0, neighbor)
+        return cls.BFTRecHelper(graph, visited, queue, traversal)
 
 def createRandomUnweightedGraphIter(n):
     g = Graph()
@@ -149,10 +150,16 @@ graph.nodes[11].neighbors = [graph.nodes[12], graph.nodes[7], graph.nodes[1]]
 graph.nodes[12].neighbors = [graph.nodes[7], graph.nodes[11]]
 graph.nodes[13].neighbors = [graph.nodes[2]]
 
-print(GraphSearch.DFSIter(graph.nodes[0], graph.nodes[9]))
-print(GraphSearch.DFSRec(graph.nodes[0], graph.nodes[9]))
-print(GraphSearch.BFTIter(graph))
-print(GraphSearch.BFTRec(graph))
+def printvals(lst):
+    for i in range(len(lst)-1):
+        print(lst[i].val, end=" -> ")
+    if len(lst) > 0:
+        print(lst[-1].val)
+
+printvals(GraphSearch.DFSIter(graph.nodes[0], graph.nodes[9]))
+printvals(GraphSearch.DFSRec(graph.nodes[0], graph.nodes[9]))
+printvals(GraphSearch.BFTIter(graph))
+printvals(GraphSearch.BFTRec(graph))
 
 BFTIterLinkedList()
 BFTRecLinkedList()
