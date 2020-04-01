@@ -73,52 +73,53 @@ def dijkstras(start):
 
     return d
 
-graph = WeightedGraph()
+if __name__ == "__main__":
+    graph = WeightedGraph()
 
-graph.addNode('A') # 0
-graph.addNode('B') # 1
-graph.addNode('C') # 2
-graph.addNode('D') # 3
-graph.addNode('E') # 4
-graph.addNode('F') # 5
-graph.addNode('G') # 6
+    graph.addNode('A') # 0
+    graph.addNode('B') # 1
+    graph.addNode('C') # 2
+    graph.addNode('D') # 3
+    graph.addNode('E') # 4
+    graph.addNode('F') # 5
+    graph.addNode('G') # 6
 
-graph.addWeightedEdge(graph.nodes[0], graph.nodes[1], 2)
-graph.addWeightedEdge(graph.nodes[1], graph.nodes[0], 2)
+    graph.addWeightedEdge(graph.nodes[0], graph.nodes[1], 2)
+    graph.addWeightedEdge(graph.nodes[1], graph.nodes[0], 2)
 
-graph.addWeightedEdge(graph.nodes[0], graph.nodes[2], 4)
-graph.addWeightedEdge(graph.nodes[2], graph.nodes[0], 4)
+    graph.addWeightedEdge(graph.nodes[0], graph.nodes[2], 4)
+    graph.addWeightedEdge(graph.nodes[2], graph.nodes[0], 4)
 
-graph.addWeightedEdge(graph.nodes[0], graph.nodes[3], 7)
-graph.addWeightedEdge(graph.nodes[3], graph.nodes[0], 7)
+    graph.addWeightedEdge(graph.nodes[0], graph.nodes[3], 7)
+    graph.addWeightedEdge(graph.nodes[3], graph.nodes[0], 7)
 
-graph.addWeightedEdge(graph.nodes[0], graph.nodes[5], 5)
-graph.addWeightedEdge(graph.nodes[5], graph.nodes[0], 5)
+    graph.addWeightedEdge(graph.nodes[0], graph.nodes[5], 5)
+    graph.addWeightedEdge(graph.nodes[5], graph.nodes[0], 5)
 
-graph.addWeightedEdge(graph.nodes[2], graph.nodes[5], 6)
-graph.addWeightedEdge(graph.nodes[5], graph.nodes[2], 6)
+    graph.addWeightedEdge(graph.nodes[2], graph.nodes[5], 6)
+    graph.addWeightedEdge(graph.nodes[5], graph.nodes[2], 6)
 
-graph.addWeightedEdge(graph.nodes[3], graph.nodes[5], 10)
-graph.addWeightedEdge(graph.nodes[5], graph.nodes[3], 10)
+    graph.addWeightedEdge(graph.nodes[3], graph.nodes[5], 10)
+    graph.addWeightedEdge(graph.nodes[5], graph.nodes[3], 10)
 
-graph.addWeightedEdge(graph.nodes[3], graph.nodes[6], 6)
-graph.addWeightedEdge(graph.nodes[6], graph.nodes[3], 6)
+    graph.addWeightedEdge(graph.nodes[3], graph.nodes[6], 6)
+    graph.addWeightedEdge(graph.nodes[6], graph.nodes[3], 6)
 
-graph.addWeightedEdge(graph.nodes[5], graph.nodes[6], 6)
-graph.addWeightedEdge(graph.nodes[6], graph.nodes[5], 6)
+    graph.addWeightedEdge(graph.nodes[5], graph.nodes[6], 6)
+    graph.addWeightedEdge(graph.nodes[6], graph.nodes[5], 6)
 
-graph.addWeightedEdge(graph.nodes[1], graph.nodes[3], 6)
-graph.addWeightedEdge(graph.nodes[3], graph.nodes[1], 6)
+    graph.addWeightedEdge(graph.nodes[1], graph.nodes[3], 6)
+    graph.addWeightedEdge(graph.nodes[3], graph.nodes[1], 6)
 
-graph.addWeightedEdge(graph.nodes[1], graph.nodes[4], 3)
-graph.addWeightedEdge(graph.nodes[4], graph.nodes[1], 3)
+    graph.addWeightedEdge(graph.nodes[1], graph.nodes[4], 3)
+    graph.addWeightedEdge(graph.nodes[4], graph.nodes[1], 3)
 
-graph.addWeightedEdge(graph.nodes[1], graph.nodes[6], 8)
-graph.addWeightedEdge(graph.nodes[6], graph.nodes[1], 8)
+    graph.addWeightedEdge(graph.nodes[1], graph.nodes[6], 8)
+    graph.addWeightedEdge(graph.nodes[6], graph.nodes[1], 8)
 
-graph.addWeightedEdge(graph.nodes[4], graph.nodes[6], 7)
-graph.addWeightedEdge(graph.nodes[6], graph.nodes[4], 7)
+    graph.addWeightedEdge(graph.nodes[4], graph.nodes[6], 7)
+    graph.addWeightedEdge(graph.nodes[6], graph.nodes[4], 7)
 
-dijkstras = dijkstras(graph.nodes[0])
-for key in dijkstras:
-    print('{}: {}'.format(key.val, dijkstras[key]))
+    dijkstras = dijkstras(graph.nodes[0])
+    for key in dijkstras:
+        print('{}: {}'.format(key.val, dijkstras[key]))

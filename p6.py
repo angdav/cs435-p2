@@ -39,22 +39,23 @@ def createRandomGridGraph(n):
             g.addGridNode(i, j, n*i + j)
 
     tried = set()
+    # Note: Likelihood changed to 80% so that a path to destNode exists almost every time
     for node in g.getAllNodes():
         if node.x - 1 >= 0 and frozenset([node, g.nodes[(node.x-1, node.y)]]) not in tried:
             tried.add(frozenset([node, g.nodes[(node.x-1, node.y)]]))
-            if random.randint(1, 1) == 1:
+            if random.randint(1, 10) <= 8:
                 g.addUndirectedEdge(node, g.nodes[(node.x-1, node.y)])
         if node.x + 1 < n and frozenset([node, g.nodes[(node.x+1, node.y)]]) not in tried:
             tried.add(frozenset([node, g.nodes[(node.x+1, node.y)]]))
-            if random.randint(1, 1) == 1:
+            if random.randint(1, 10) <= 8:
                 g.addUndirectedEdge(node, g.nodes[(node.x+1, node.y)])
         if node.y - 1 >= 0 and frozenset([node, g.nodes[(node.x, node.y-1)]]) not in tried:
             tried.add(frozenset([node, g.nodes[(node.x, node.y-1)]]))
-            if random.randint(1, 1) == 1:
+            if random.randint(1, 10) <= 8:
                 g.addUndirectedEdge(node, g.nodes[(node.x, node.y-1)])
         if node.y + 1 < n and frozenset([node, g.nodes[(node.x, node.y+1)]]) not in tried:
             tried.add(frozenset([node, g.nodes[(node.x, node.y+1)]]))
-            if random.randint(1, 1) == 1:
+            if random.randint(1, 10) <= 8:
                 g.addUndirectedEdge(node, g.nodes[(node.x, node.y+1)])
     
     return g
@@ -101,38 +102,39 @@ def printvals(lst):
         print(lst[i].val, end=" -> ")
     if len(lst) > 0:
         print(lst[-1].val)
-        
-g = createRandomGridGraph(10)
-sourceNode = g.nodes[(0, 0)]
-destNode = g.nodes[(9, 9)]
-printvals(astar(sourceNode, destNode))
 
-graph = GridGraph()
+if __name__ == "__main__":   
+    g = createRandomGridGraph(10)
+    sourceNode = g.nodes[(0, 0)]
+    destNode = g.nodes[(9, 9)]
+    printvals(astar(sourceNode, destNode))
 
-graph.addGridNode(0, 0, 'A') # 0
-graph.addGridNode(1, 0, 'B') # 1
-graph.addGridNode(2, 0, 'C') # 2
-graph.addGridNode(0, 1, 'D') # 3
-graph.addGridNode(1, 1, 'E') # 4
-graph.addGridNode(2, 1, 'F') # 5
-graph.addGridNode(0, 2, 'G') # 6
+    graph = GridGraph()
 
-#   G
-#   |
-#   D - E - F
-#   |   |   |
-#   A - B - C
+    graph.addGridNode(0, 0, 'A') # 0
+    graph.addGridNode(1, 0, 'B') # 1
+    graph.addGridNode(2, 0, 'C') # 2
+    graph.addGridNode(0, 1, 'D') # 3
+    graph.addGridNode(1, 1, 'E') # 4
+    graph.addGridNode(2, 1, 'F') # 5
+    graph.addGridNode(0, 2, 'G') # 6
 
-graph.addUndirectedEdge(graph.nodes[(0,0)], graph.nodes[(1,0)])
-graph.addUndirectedEdge(graph.nodes[(0,0)], graph.nodes[(0,1)])
-graph.addUndirectedEdge(graph.nodes[(1,0)], graph.nodes[(2,0)])
-graph.addUndirectedEdge(graph.nodes[(1,0)], graph.nodes[(1,1)])
-graph.addUndirectedEdge(graph.nodes[(2,0)], graph.nodes[(2,1)])
-graph.addUndirectedEdge(graph.nodes[(1,1)], graph.nodes[(2,1)])
-graph.addUndirectedEdge(graph.nodes[(1,1)], graph.nodes[(0,1)])
-graph.addUndirectedEdge(graph.nodes[(0,1)], graph.nodes[(0,2)])
+    #   G
+    #   |
+    #   D - E - F
+    #   |   |   |
+    #   A - B - C
 
-src = graph.nodes[(0,0)]
-dest = graph.nodes[(0,2)]
+    graph.addUndirectedEdge(graph.nodes[(0,0)], graph.nodes[(1,0)])
+    graph.addUndirectedEdge(graph.nodes[(0,0)], graph.nodes[(0,1)])
+    graph.addUndirectedEdge(graph.nodes[(1,0)], graph.nodes[(2,0)])
+    graph.addUndirectedEdge(graph.nodes[(1,0)], graph.nodes[(1,1)])
+    graph.addUndirectedEdge(graph.nodes[(2,0)], graph.nodes[(2,1)])
+    graph.addUndirectedEdge(graph.nodes[(1,1)], graph.nodes[(2,1)])
+    graph.addUndirectedEdge(graph.nodes[(1,1)], graph.nodes[(0,1)])
+    graph.addUndirectedEdge(graph.nodes[(0,1)], graph.nodes[(0,2)])
 
-printvals(astar(src, dest))
+    src = graph.nodes[(0,0)]
+    dest = graph.nodes[(0,2)]
+
+    printvals(astar(src, dest))
