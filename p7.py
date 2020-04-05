@@ -63,7 +63,11 @@ def countingAstar(sourceNode, destNode):
     traversal = []
     while path:
         traversal.insert(0, path)
-        path = d[path][2]
+        if path in d:
+            path = d[path][2]
+        else:
+            print("A* nodes that are visited:", round(vCount/10000*100, 2), "%")
+            return [] # means no path to goal
 
     print("A* nodes that are visited:", round(vCount/10000*100, 2), "%")
     return traversal
