@@ -85,7 +85,6 @@ class TopSort:
         stack.append(node)
 
 def createRandomDAGIter(n):
-    # might have to fix acyclic portion
     g = DirectedGraph()
     for i in range(n):
         g.addNode(random.randint(0, 10*n))
@@ -117,6 +116,9 @@ def printvals(lst):
         print(lst[-1].val)
 
 rand = createRandomDAGIter(1000)
+
+printvals(TopSort.Kahns(graph))
+printvals(TopSort.mDFS(graph))
 
 printvals(TopSort.Kahns(rand))
 printvals(TopSort.mDFS(rand))
