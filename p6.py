@@ -105,6 +105,8 @@ def printvals(lst):
         print(lst[i].val, end=" -> ")
     if len(lst) > 0:
         print(lst[-1].val)
+    else:
+        print("No path exists")
 
 if __name__ == "__main__":   
     g = createRandomGridGraph(10)
