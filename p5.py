@@ -35,7 +35,7 @@ def createRandomCompleteWeightedGraph(n):
     for node in g.getAllNodes():
         for node2 in g.getAllNodes():
             if node != node2:
-                g.addWeightedEdge(node, node2, random.randint(1,10))
+                g.addWeightedEdge(node, node2, random.randint(1,100))
     return g
 
 def createLinkedList(n):
@@ -99,8 +99,8 @@ if __name__ == "__main__":
     graph.addWeightedEdge(graph.nodes[2], graph.nodes[5], 6)
     graph.addWeightedEdge(graph.nodes[5], graph.nodes[2], 6)
 
-    graph.addWeightedEdge(graph.nodes[3], graph.nodes[5], 10)
-    graph.addWeightedEdge(graph.nodes[5], graph.nodes[3], 10)
+    graph.addWeightedEdge(graph.nodes[3], graph.nodes[5], 1)
+    graph.addWeightedEdge(graph.nodes[5], graph.nodes[3], 1)
 
     graph.addWeightedEdge(graph.nodes[3], graph.nodes[6], 6)
     graph.addWeightedEdge(graph.nodes[6], graph.nodes[3], 6)
@@ -117,9 +117,14 @@ if __name__ == "__main__":
     graph.addWeightedEdge(graph.nodes[1], graph.nodes[6], 8)
     graph.addWeightedEdge(graph.nodes[6], graph.nodes[1], 8)
 
-    graph.addWeightedEdge(graph.nodes[4], graph.nodes[6], 7)
-    graph.addWeightedEdge(graph.nodes[6], graph.nodes[4], 7)
+    graph.addWeightedEdge(graph.nodes[4], graph.nodes[6], 4)
+    graph.addWeightedEdge(graph.nodes[6], graph.nodes[4], 4)
 
-    dijkstras = dijkstras(graph.nodes[0])
-    for key in dijkstras:
-        print('{}: {}'.format(key.val, dijkstras[key]))
+    testdijkstras = dijkstras(graph.nodes[0])
+    for key in testdijkstras:
+        print('{}: {}'.format(key.val, testdijkstras[key]))
+
+    epicgraph = createRandomCompleteWeightedGraph(100)
+    epicdijkstras = dijkstras(epicgraph.nodes[0])
+    for key in epicdijkstras:
+        print('{}: {}'.format(key.val, epicdijkstras[key]))
