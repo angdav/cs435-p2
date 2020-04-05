@@ -93,7 +93,10 @@ def astar(sourceNode, destNode):
     traversal = []
     while path:
         traversal.insert(0, path)
-        path = d[path][2]
+        if path in d:
+            path = d[path][2]
+        else:
+            return [] # means no path to goal
 
     return traversal
 
