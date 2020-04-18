@@ -1,39 +1,9 @@
 import random
+import  GridNode
+import GridGraph
 
-class GridNode:
-    
-    def __init__(self, x, y, val):
-        self.val = val
-        self.x = x
-        self.y = y
-        self.neighbors = set()
-
-class GridGraph:
-    def __init__(self):
-        self.nodes = {}
-
-    def addGridNode(self, x, y, nodeVal):
-        node = GridNode(x, y, nodeVal)
-        self.nodes[(x,y)] = node
-
-    def addUndirectedEdge(self, first, second):
-        if (abs(first.x - second.x) == 1) != (abs(first.y - second.y) == 1):
-            if second not in first.neighbors:
-                first.neighbors.add(second)
-            if first not in second.neighbors:
-                second.neighbors.add(first)
-    
-    def removeUndirectedEdge(self, first, second):
-        if second in first.neighbors:
-            first.neighbors.remove(second)
-        if first not in second.neighbors:
-            second.neighbors.add(first)
-
-    def getAllNodes(self):
-        return set(self.nodes.values())
-
-def createRandomGridGraph(n):
-    g = GridGraph()
+def createRandomGridGraph(n: int) -> GridGraph:
+    g = GridGraph.GridGraph()
     for i in range(n):
         for j in range(n):
             g.addGridNode(i, j, n*i + j)
@@ -60,10 +30,10 @@ def createRandomGridGraph(n):
     
     return g
 
-def manhattanDistance(node, destNode):
+def manhattanDistance(node: GridNode, destNode: GridNode) -> int:
     return abs(node.x - destNode.x) + abs(node.y - destNode.y)
     
-def minDistance(d, visited):
+def minDistance(d: dict, visited: set) -> GridNode:
     ans = None
     m = float('inf')
     for node in d:
@@ -72,9 +42,8 @@ def minDistance(d, visited):
             ans = node
     return ans
 
-def astar(sourceNode, destNode):
+def astar(sourceNode: GridNode, destNode: GridNode) -> list:
     d = {}
-    # g, h, parentNode
     d[sourceNode] = (0, manhattanDistance(sourceNode, destNode), None)
     curr = sourceNode
     visited = set()
@@ -92,15 +61,15 @@ def astar(sourceNode, destNode):
     path = destNode
     traversal = []
     while path:
-        traversal.insert(0, path)
+        traversal.append(path)
         if path in d:
             path = d[path][2]
         else:
-            return [] # means no path to goal
+            return None
 
-    return traversal
+    return list(reversed(traversal))
 
-def printvals(lst):
+def printvals(lst: list) -> None:
     for i in range(len(lst)-1):
         print(lst[i].val, end=" -> ")
     if len(lst) > 0:
@@ -114,7 +83,7 @@ if __name__ == "__main__":
     destNode = g.nodes[(9, 9)]
     printvals(astar(sourceNode, destNode))
 
-    graph = GridGraph()
+    graph = GridGraph.GridGraph()
 
     graph.addGridNode(0, 0, 'A') # 0
     graph.addGridNode(1, 0, 'B') # 1

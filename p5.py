@@ -1,54 +1,26 @@
 import random
+import NodeW
+import WeightedGraph
 
-class Node:
-    
-    def __init__(self, val):
-        self.val = val
-        self.neighbors = set()
-        self.weights = {}
-
-class WeightedGraph:
-    def __init__(self):
-        self.nodes = []
-
-    def addNode(self, val):
-        node = Node(val)
-        self.nodes.append(node)
-
-    def addWeightedEdge(self, first, second, edgeWeight):
-        if second not in first.neighbors:
-            first.neighbors.add(second)
-            first.weights[second] = edgeWeight
-    
-    def removeWeightedEdge(self, first, second):
-        if second in first.neighbors:
-            first.neighbors.remove(second)
-            del first.weights[second]
-
-    def getAllNodes(self):
-        return set(self.nodes)
-
-def createRandomCompleteWeightedGraph(n):
-    g = WeightedGraph()
+def createRandomCompleteWeightedGraph(n: int) -> WeightedGraph:
+    wGraph = WeightedGraph.WeightedGraph()
     for i in range(n):
-        g.addNode(i)
-    for node in g.getAllNodes():
-        for node2 in g.getAllNodes():
+        wGraph.addNode(i)
+    for node in wGraph.getAllNodes():
+        for node2 in wGraph.getAllNodes():
             if node != node2:
-                g.addWeightedEdge(node, node2, random.randint(1,100))
-    return g
+                wGraph.addWeightedEdge(node, node2, random.randint(1,100))
+    return wGraph
 
-def createLinkedList(n):
-    g = WeightedGraph()
+def createLinkedList(n: int) -> WeightedGraph:
+    g = WeightedGraph.WeightedGraph()
     g.addNode(0)
     for i in range(1, n):
         g.addNode(i)
         g.addWeightedEdge(g.nodes[i-1], g.nodes[i], 1)
     return g
 
-ll = createLinkedList(100)
-
-def minDistance(d, visited):
+def minDistance(d: dict, visited: set) -> NodeW:
     ans = None
     m = float('inf')
     for node in d:
@@ -57,7 +29,7 @@ def minDistance(d, visited):
             ans = node
     return ans
 
-def dijkstras(start):
+def dijkstras(start: NodeW) -> dict:
     d = {}
     d[start] = 0
     visited = set()
@@ -74,7 +46,9 @@ def dijkstras(start):
     return d
 
 if __name__ == "__main__":
-    graph = WeightedGraph()
+    sampleLinkedList = createLinkedList(100)
+
+    graph = WeightedGraph.WeightedGraph()
 
     graph.addNode('A') # 0
     graph.addNode('B') # 1

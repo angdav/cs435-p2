@@ -1,7 +1,11 @@
-import p6
+import NodeW
+import GridNode
+import WeightedGraph
+import GridGraph
 import p5
+import p6
 
-def minDistance(d, visited):
+def minDistance(d: dict, visited: set) -> NodeW:
     ans = None
     m = float('inf')
     for node in d:
@@ -10,7 +14,7 @@ def minDistance(d, visited):
             ans = node
     return ans
 
-def countingDijkstras(start):
+def countingDijkstras(start: NodeW) -> dict:
     d = {}
     d[start] = 0
     visited = set()
@@ -29,10 +33,11 @@ def countingDijkstras(start):
     print("Dijkstra's nodes that are visited:", vCount, "%")
     return d
 
-def manhattanDistance(node, destNode):
+def manhattanDistance(node: GridNode, destNode: GridNode) -> int:
     return abs(node.x - destNode.x) + abs(node.y - destNode.y)
     
-def minDistance2(d, visited):
+# minDistance made for GridGraphs
+def minDistanceGrid(d: dict, visited: set) -> GridNode:
     ans = None
     m = float('inf')
     for node in d:
@@ -41,7 +46,7 @@ def minDistance2(d, visited):
             ans = node
     return ans   
 
-def countingAstar(sourceNode, destNode):
+def countingAstar(sourceNode: GridNode, destNode: GridNode) -> list:
     d = {}
     d[sourceNode] = (0, manhattanDistance(sourceNode, destNode), None)
     curr = sourceNode
@@ -57,7 +62,7 @@ def countingAstar(sourceNode, destNode):
                 h = manhattanDistance(neighbor, destNode)
                 if neighbor not in d or newD + h < d[neighbor][0] + d[neighbor][1]:
                     d[neighbor] = (newD, h, curr)
-        curr = minDistance2(d, visited)
+        curr = minDistanceGrid(d, visited)
 
     path = destNode
     traversal = []
